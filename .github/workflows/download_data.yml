@@ -26,6 +26,7 @@ jobs:
         R -e 'install.packages("rnaturalearthdata")'
         R -e 'install.packages("sf")'
         R -e 'install.packages("data.table")'
+        R -e 'install.packages("zoo")'
                 
     # Run R script
     - name: Data_collect

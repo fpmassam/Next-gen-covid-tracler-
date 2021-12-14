@@ -4,7 +4,7 @@ name: download_data
 # Controls when the action will run.
 on:
   schedule:
-    - cron:  '5 * * * *'
+    - cron:  '15 * * * *'
 
 
 jobs: 
@@ -22,15 +22,14 @@ jobs:
       run: |
         R -e 'install.packages("tidyverse")'
         R -e 'install.packages("ggiraph")'
-        R -e 'install.packages("tidyverse")'
-        R -e 'install.packages("ggiraph")'
-        R -e 'install.packages("tidyverse")'
-        R -e 'install.packages("ggiraph")'
-        R -e 'install.packages("tidyverse")'
-        R -e 'install.packages("ggiraph")'
+        R -e 'install.packages("rnaturalearth")'
+        R -e 'install.packages("rnaturalearthdata")'
+        R -e 'install.packages("sf")'
+        R -e 'install.packages("data.table")'
+                
     # Run R script
-    - name: Scrape
-      run: Rscript sitemap_scraping.R
+    - name: Data_collect
+      run: Rscript data_collection.R
       
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files

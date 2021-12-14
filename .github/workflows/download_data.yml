@@ -39,7 +39,7 @@ jobs:
         git config --local user.name fpmassam
         git config --local user.email "francesco.picinelli@gmail.com"
         git add data/*
-        git commit -am "GH ACTION Headlines $(date)"
+        git commit -am "R_workspace"
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}

@@ -1,6 +1,5 @@
 library(readr)
 library(tidyverse)
-library(extrafont)
 library(ggiraph)
 library(rnaturalearth)
 library(rnaturalearthdata)

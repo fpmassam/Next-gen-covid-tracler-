@@ -1,17 +1,43 @@
-name: GitHub Actions Demo
-on: [push]
-jobs:
-  Explore-GitHub-Actions:
+name: covid_tracker_data
+
+# Controls when the action will run.
+on:
+  schedule:
+    - cron:  '0 13 * * *'
+
+
+jobs: 
+  autoscrape:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Load repo and install R
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+
+    # Set-up R
+    - name: Install packages
+      run: |
+        R -e 'install.packages("tidyverse")'
+        R -e 'install.packages("ggiraph")'
+        R- e 'install.paclages("readr")'
+        R -e 'install.packages("extrafont")'
+        R -e 'install.packages("extrafont")'
+        R -e 'install.packages("rnaturalearth")'
+        R -e 'install.packages("sf")'
+        R -e 'install.packages("data.table")'
+        
+             
+    # Run R script
+    - name: data_elaboration
+      run: data_elaboration.R
+      
+ # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name actions-user
+        git config --local user.email "francesco.piccinelli@gmail.com"
+        git add data/*
+        git commit -am "GH ACTION Headlines $(date)"
+        git push origin main

@@ -38,7 +38,7 @@ jobs:
       run: |
         git config --local user.name fpmassam
         git config --local user.email "francesco.picinelli@gmail.com"
-        git add data/*
+        git **/*.RData
         git commit -am "R_workspace"
         git push origin main
       env:
